@@ -1,6 +1,11 @@
+
+import os
+import sys
 import requests
-from ..lib.RequestPage import RequestsHandler # Don't working now. I need to fix this import
-#from RequestPage import RequestsHandler / Working if you run the script on the same directory
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from lib.RequestPage import RequestsHandler # WORKING NOW :)
 
 handler = RequestsHandler()
 
@@ -15,6 +20,7 @@ def check_robots_txt(url):
         list: Lista de palavras-chave encontradas no arquivo robots.txt.
     """
     # Adiciona /robots.txt à URL
+    
     if not url.endswith('/'):
         url += '/'
     robots_url = url + 'robots.txt'
