@@ -24,6 +24,16 @@ def index():
         return redirect(url_for('perfil', username=session['username']))
     return redirect(url_for('login'))
 
+@app.route('/robots.txt', methods=['GET'])
+def robots_txt():
+    return "User-agent: *\nDisallow: /admin\nAllow: /", 200, {'Content-Type': 'text/plain'}
+
+@app.route('/admin', methods=['GET'])
+def admin():
+    if 'username' in session and users[session['username']]['role'] == 'admin':
+        return "Área administrativa - acesso permitido."
+    return "Acesso negado", 403
+
 # Página de login
 @app.route('/login', methods=['GET', 'POST'])
 def login():

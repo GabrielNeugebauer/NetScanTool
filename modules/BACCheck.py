@@ -61,6 +61,10 @@ def test_bac(session, url, target_username):
         #print(f"Perfil de {target_username} não encontrado (404).")
     elif response.status_code == 403:
         print(f"Acesso a {target_username} foi negado.")
+    elif response.status_code == 400:
+        print(f"Bad request {target_username}.")
+    else:
+        print(f"Erro inesperado ao acessar {target_username}: {response.status_code}")
 
 # Função principal que organiza o processo
 def check_bac(url, valid_user, valid_password, users_to_test):
@@ -81,7 +85,7 @@ def check_bac(url, valid_user, valid_password, users_to_test):
             test_bac(session, base_url, target_user)
 
 # URLs de exemplo (mude para seu site)
-url = 'https://localhost:5000'  # Altere para o site que você deseja testar
+url = 'http://localhost:5000'  # Altere para o site que você deseja testar
 valid_user = 'user1'  # Nome de usuário com login válido
 valid_password = 'password1'  # Senha para login
 users_to_test = load_wordlist('../lists/Usernames.txt')  # Usuários cujos perfis queremos verificar
