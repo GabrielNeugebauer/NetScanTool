@@ -5,9 +5,7 @@ import requests
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from lib.RequestPage import RequestsHandler # WORKING NOW :)
-
-handler = RequestsHandler()
+from lib.RequestPage import request_page # WORKING NOW :)
 
 def check_robots_txt(url):
     """
@@ -20,7 +18,7 @@ def check_robots_txt(url):
         list: Lista de palavras-chave encontradas no arquivo robots.txt.
     """
     # Adiciona /robots.txt à URL
-    
+
     if not url.endswith('/'):
         url += '/'
     robots_url = url + 'robots.txt'
@@ -43,7 +41,7 @@ def check_robots_txt(url):
                 url = url[:-1]
             complete_url = url + keyword.split(':')[1].strip()  # Extrai a URL após o ':' e remove espaços em branco
             #print(f"Verificando URL: {complete_url, type(complete_url)}") # Debugging
-            code, response = handler.request_page(complete_url)
+            code, response = request_page(complete_url)
             found_pages = {}
             if code != 404:
                 found_pages[complete_url]= f'resposta: {response}'
