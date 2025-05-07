@@ -1,16 +1,11 @@
 import requests
 from urllib.parse import urljoin
 import os
+import sys
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-def load_usernames(path):
-    try:
-        with open(path, 'r') as file:
-            return [line.strip() for line in file if line.strip()]
-    except Exception as error:
-        print(f"[!] Failed to load wordlist: {error}")
-        return []
-
+from lib.LoadFile import loadFile
 
 def login(base_url, username, password):
     login_url = urljoin(base_url, '/login')
@@ -72,7 +67,7 @@ def check_bac(base_url, valid_user, valid_pass, target_users):
 base_path = os.path.dirname(__file__)
 wordlist_path = os.path.join(base_path, '../lists/Usernames.txt')
 
-target_users = load_usernames(wordlist_path)
+target_users = loadFile(wordlist_path)
 
 # Replace with your actual values
 url = 'http://localhost:5000'

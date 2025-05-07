@@ -4,8 +4,8 @@ import sys
 import requests
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-from lib.RequestPage import request_page # WORKING NOW :)
+from lib.LoadFile import loadFile
+from lib.RequestPage import request_page
 
 def check_robots_txt(url):
     """
@@ -33,7 +33,7 @@ def check_robots_txt(url):
         text_content = response.text
         
         # Palavras-chave a serem buscadas
-        keywords = ['adm', 'admin', 'login', 'dashboard', 'cpanel','cpainel']
+        keywords = loadFile('../lists/AdminPages.txt')
         found_keywords = [line for line in text_content.splitlines() if any(keyword in line for keyword in keywords)]
         
         for keyword in found_keywords:

@@ -11,7 +11,7 @@ Returns:
     str: Conteúdo da página, se encontrada; caso contrário, uma mensagem de erro.
 """
 
-def request_page(self,url):
+def request_page(url):
     try:
         response = requests.get(url)
 
